@@ -7,6 +7,7 @@ export default {
     finance: 'Finance',
     demandForecast: 'Demand Forecast',
     reports: 'Reports',
+    alerts: 'Alerts',
     companyName: 'Catalyst Components',
     subtitle: 'Inventory Management System'
   },
@@ -218,6 +219,37 @@ export default {
       avgMonthlyRevenue: 'Avg Monthly Revenue',
       totalOrdersYTD: 'Total Orders (YTD)',
       bestQuarter: 'Best Performing Quarter'
+    }
+  },
+
+  // Alerts
+  alerts: {
+    title: 'Low Stock Alerts',
+    summary: {
+      outOfStock: 'Out of Stock',
+      critical: 'Critical',
+      low: 'Low Stock'
+    },
+    table: {
+      severity: 'Severity',
+      sku: 'SKU',
+      name: 'Name',
+      category: 'Category',
+      warehouse: 'Warehouse',
+      onHand: 'On Hand',
+      reorderPoint: 'Reorder Point',
+      unitCost: 'Unit Cost',
+      action: 'Action'
+    },
+    severityLabel: {
+      out_of_stock: 'Out of Stock',
+      critical: 'Critical',
+      low: 'Low',
+      ok: 'OK'
+    },
+    emptyState: 'All stock levels healthy',
+    action: {
+      reorder: 'Reorder'
     }
   },
 

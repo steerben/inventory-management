@@ -3,6 +3,7 @@ import { createRouter, createWebHistory } from 'vue-router'
 import App from './App.vue'
 import Dashboard from './views/Dashboard.vue'
 import Inventory from './views/Inventory.vue'
+import Alerts from './views/Alerts.vue'
 import Orders from './views/Orders.vue'
 import Demand from './views/Demand.vue'
 import Spending from './views/Spending.vue'
@@ -18,10 +19,11 @@ const router = createRouter({
   routes: [
     { path: '/',          component: Dashboard, meta: { labelKey: 'nav.overview',        icon: 'home',          order: 1 } },
     { path: '/inventory', component: Inventory, meta: { labelKey: 'nav.inventory',       icon: 'package',       order: 2 } },
-    { path: '/orders',    component: Orders,    meta: { labelKey: 'nav.orders',          icon: 'shopping-cart', order: 3 } },
-    { path: '/demand',    component: Demand,    meta: { labelKey: 'nav.demandForecast',  icon: 'trending-up',   order: 4 } },
-    { path: '/spending',  component: Spending,  meta: { labelKey: 'nav.finance',         icon: 'dollar-sign',   order: 5 } },
-    { path: '/reports',   component: Reports,   meta: { labelKey: 'nav.reports',         icon: 'bar-chart',     order: 6 } }
+    { path: '/alerts',    component: Alerts,    meta: { labelKey: 'nav.alerts',          icon: 'alert-triangle', order: 3 } },
+    { path: '/orders',    component: Orders,    meta: { labelKey: 'nav.orders',          icon: 'shopping-cart', order: 4 } },
+    { path: '/demand',    component: Demand,    meta: { labelKey: 'nav.demandForecast',  icon: 'trending-up',   order: 5 } },
+    { path: '/spending',  component: Spending,  meta: { labelKey: 'nav.finance',         icon: 'dollar-sign',   order: 6 } },
+    { path: '/reports',   component: Reports,   meta: { labelKey: 'nav.reports',         icon: 'bar-chart',     order: 7 } }
   ]
 })
 

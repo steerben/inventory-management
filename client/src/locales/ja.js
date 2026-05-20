@@ -7,6 +7,7 @@ export default {
     finance: '財務',
     demandForecast: '需要予測',
     reports: 'レポート',
+    alerts: 'アラート',
     companyName: '触媒コンポーネンツ',
     subtitle: '在庫管理システム'
   },
@@ -218,6 +219,37 @@ export default {
       avgMonthlyRevenue: '平均月次収益',
       totalOrdersYTD: '総注文数（年初来）',
       bestQuarter: '最高パフォーマンスの四半期'
+    }
+  },
+
+  // Alerts
+  alerts: {
+    title: '在庫アラート',
+    summary: {
+      outOfStock: '在庫切れ',
+      critical: '重大',
+      low: '在庫僅少'
+    },
+    table: {
+      severity: '重大度',
+      sku: 'SKU',
+      name: '名前',
+      category: 'カテゴリ',
+      warehouse: '倉庫',
+      onHand: '手持在庫数',
+      reorderPoint: '再注文点',
+      unitCost: '単価',
+      action: 'アクション'
+    },
+    severityLabel: {
+      out_of_stock: '在庫切れ',
+      critical: '重大',
+      low: '僅少',
+      ok: '正常'
+    },
+    emptyState: 'すべての在庫レベルは正常です',
+    action: {
+      reorder: '再注文'
     }
   },
 

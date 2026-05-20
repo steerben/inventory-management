@@ -133,6 +133,66 @@ def get_inventory(
     """Get all inventory items with optional filtering"""
     return apply_filters(inventory_items, warehouse, category)
 
+def classify_stock_severity(quantity_on_hand: int, reorder_point: int) -> str:
+    """Classify an inventory item's stock level into a severity bucket.
+
+    Returns one of: "out_of_stock", "critical", "low", "ok".
+
+    The thresholds below are the business rules that drive the Alerts view —
+    edit here to change how aggressively the dashboard flags items.
+    """
+    # Ratio-based thresholds so SKUs with very different reorder_points
+    # (e.g. high-volume PCBs at 200 vs low-volume sensors at 20) trigger fairly.
+    if quantity_on_hand == 0:
+        return "out_of_stock"
+    ratio = quantity_on_hand / reorder_point
+    if ratio < 0.25:
+        return "critical"
+    if ratio <= 1.0:
+        return "low"
+    return "ok"
+
+
+class InventoryAlert(BaseModel):
+    id: str
+    sku: str
+    name: str
+    category: str
+    warehouse: str
+    quantity_on_hand: int
+    reorder_point: int
+    unit_cost: float
+    severity: str  # "out_of_stock" | "critical" | "low" | "ok"
+
+
+@app.get("/api/inventory/alerts", response_model=List[InventoryAlert])
+def get_inventory_alerts(
+    warehouse: Optional[str] = None,
+    category: Optional[str] = None,
+    severity: Optional[str] = None
+):
+    """Return inventory items annotated with a severity classification.
+
+    By default returns items that need attention (everything except "ok").
+    Pass severity=all to include healthy stock too.
+    """
+    filtered = apply_filters(inventory_items, warehouse, category)
+
+    annotated = []
+    for item in filtered:
+        sev = classify_stock_severity(item["quantity_on_hand"], item["reorder_point"])
+        annotated.append({**item, "severity": sev})
+
+    if severity and severity != 'all':
+        annotated = [a for a in annotated if a["severity"] == severity]
+    else:
+        annotated = [a for a in annotated if a["severity"] != "ok"]
+
+    severity_order = {"out_of_stock": 0, "critical": 1, "low": 2, "ok": 3}
+    annotated.sort(key=lambda a: (severity_order.get(a["severity"], 99), a["sku"]))
+    return annotated
+
+
 @app.get("/api/inventory/{item_id}", response_model=InventoryItem)
 def get_inventory_item(item_id: str):
     """Get a specific inventory item"""

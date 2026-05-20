@@ -17,6 +17,16 @@ export const api = {
     return response.data
   },
 
+  async getInventoryAlerts(filters = {}) {
+    const params = new URLSearchParams()
+    if (filters.warehouse && filters.warehouse !== 'all') params.append('warehouse', filters.warehouse)
+    if (filters.category && filters.category !== 'all') params.append('category', filters.category)
+    if (filters.severity && filters.severity !== 'all') params.append('severity', filters.severity)
+
+    const response = await axios.get(`${API_BASE_URL}/inventory/alerts?${params.toString()}`)
+    return response.data
+  },
+
   async getOrders(filters = {}) {
     const params = new URLSearchParams()
     if (filters.warehouse && filters.warehouse !== 'all') params.append('warehouse', filters.warehouse)
