@@ -1,0 +1,105 @@
+/* Design tokens — single source of truth for the SaaS redesign.
+   Reference these via var(--token) in components. Do not hand-write hex codes elsewhere.
+   Profile: Stripe-adjacent — light sidebar, cobalt blue accent, Geist Sans, balanced density. */
+
+:root {
+  /* Surfaces */
+  --bg-app:         #ffffff;
+  --bg-sidebar:     #ffffff;
+  --bg-surface:     #ffffff;
+  --bg-subtle:      #f8fafc;
+  --bg-hover:       #f1f5f9;
+
+  /* Text */
+  --text-primary:   #0f172a;
+  --text-secondary: #475569;
+  --text-muted:     #94a3b8;
+
+  /* Borders */
+  --border-subtle:  #e2e8f0;
+  --border-strong:  #cbd5e1;
+
+  /* Accent — cobalt blue. Reserved for: active nav, primary buttons, focus rings, key data viz. */
+  --accent:         #2563eb;
+  --accent-hover:   #1d4ed8;
+  --accent-soft:    #dbeafe;
+  --accent-on:      #ffffff;
+
+  /* Semantic */
+  --success:        #059669;
+  --success-soft:   #d1fae5;
+  --warning:        #d97706;
+  --warning-soft:   #fed7aa;
+  --danger:         #dc2626;
+  --danger-soft:    #fecaca;
+  --info:           #2563eb;
+  --info-soft:      #dbeafe;
+
+  /* Spacing — 4px base */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 24px;
+  --space-6: 32px;
+  --space-7: 48px;
+
+  /* Radii */
+  --radius-sm: 4px;
+  --radius-md: 6px;
+  --radius-lg: 10px;
+
+  /* Typography — Geist sans paired with Geist Mono for tabular data.
+     System-font fallbacks chosen for closest metric match while Geist loads. */
+  --font-sans: "Geist", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-mono: "Geist Mono", ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+
+  --text-xs:   12px;
+  --text-sm:   13px;
+  --text-base: 14px;
+  --text-lg:   16px;
+  --text-xl:   20px;
+  --text-2xl:  28px;
+
+  --leading-tight:  1.25;
+  --leading-normal: 1.5;
+
+  --weight-normal:   400;
+  --weight-medium:   500;
+  --weight-semibold: 600;
+  --weight-bold:     700;
+
+  /* Elevation — restrained. Borders carry separation; shadows only on overlays. */
+  --shadow-sm: 0 1px 2px rgba(15, 23, 42, 0.04);
+  --shadow-md: 0 4px 12px rgba(15, 23, 42, 0.08);
+  --shadow-lg: 0 12px 32px rgba(15, 23, 42, 0.12);
+
+  /* Layout constants */
+  --sidebar-w:           240px;
+  --sidebar-w-collapsed: 64px;
+  --header-h:            64px;
+  --content-max:         1400px;
+
+  /* Motion */
+  --transition-fast: 120ms ease;
+  --transition-base: 180ms ease;
+}
+
+/* Apply base font + smoothing globally. The * reset and body styles continue
+   to live in App.vue's global block — we only set the font family here so it
+   activates as soon as tokens.css loads. */
+html {
+  font-family: var(--font-sans);
+  font-size: var(--text-base);
+  color: var(--text-primary);
+}
+
+/* Tabular figures for numeric content — turns Geist's proportional digits into
+   monospaced ones inside tables, KPIs, and any element with .tabular-nums.
+   Critical for inventory tables where columns of numbers must align. */
+.tabular-nums,
+table,
+.kpi-value,
+.stat-value {
+  font-variant-numeric: tabular-nums;
+}
