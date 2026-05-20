@@ -1,9 +1,6 @@
 <template>
   <div class="reports">
-    <div class="page-header">
-      <h2>Performance Reports</h2>
-      <p>View quarterly performance metrics and monthly trends</p>
-    </div>
+    <PageHeader title="Performance Reports" />
 
     <div v-if="loading" class="loading">Loading reports...</div>
     <div v-else-if="error" class="error">{{ error }}</div>
@@ -126,9 +123,11 @@
 
 <script>
 import axios from 'axios'
+import PageHeader from '../components/PageHeader.vue'
 
 export default {
   name: 'Reports',
+  components: { PageHeader },
   data() {
     return {
       loading: true,
