@@ -28,6 +28,7 @@ jobs:
         uses: astral-sh/setup-uv@v3
         with:
           enable-cache: true
+          cache-dependency-glob: server/pyproject.toml
 
       - name: Install backend dependencies
         working-directory: server
